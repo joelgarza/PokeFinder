@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= PokeFinder
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    title Simple Map
+    meta(name='viewport', content='initial-scale=1.0')
+    meta(charset='utf-8')
+  body
+    block content
+    img#articuno(src="http://vignette3.wikia.nocookie.net/pokemon/images/d/df/144Articuno_AG_anime.png", alt="Articuno")
+    #map
+    #capture
+    //- script.
+    //-   function initMap() {
+    //-     var myLatLng = {lat: -25.363, lng: 131.044};
+    //-     var map = new google.maps.Map(document.getElementById('map'), {
+    //-     center: {lat: -34.397, lng: 150.644},
+    //-     zoom: 8
+    //-     });
+    //-     var marker = new google.maps.Marker({
+    //-     position: {lat: -34.397, lng: 150.644},
+    //-     map: map,
+    //-     title: 'Hello World!'
+    //-     });
+    //-   }
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCafvk0IzD_tMShj__V2rVl8erKjEY6nak&callback=initMap', async='', defer='')

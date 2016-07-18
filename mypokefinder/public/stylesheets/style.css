@@ -1,0 +1,33 @@
+p {
+  font-family: "Arial Black", Gadget, sans-serif;
+}
+body {
+  height: 100%;
+  margin: 0;
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("http://shapirastudent.com/4/elad/background.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+}
+#map {
+  position: absolute;
+  left: 400px;
+  top: 150px;
+  height:400px;
+  width:500px;
+
+}
+#articuno{
+  position: fixed;
+  right:100px;
+  top:100px;
+  height:100px;
+  width:100px;
+
+}
+
+a {
+  color: #00B7FF;
+}
