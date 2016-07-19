@@ -1,12 +1,19 @@
 doctype html
 html
   head
-    title= PokeFinder
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    title Simple Map
-    meta(name='viewport', content='initial-scale=1.0')
     meta(charset='utf-8')
+    meta(name='viewport', content='initial-scale=1.0, width=device-width')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    //3 tags must come first
+    title PokeFinder
+    //bootstrap
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous")
+
   body
+    nav.navbar.navbar-inverse.navbar-static-top
+      .container-fluid
+        .navbar-brand PokeFinder
     block content
     img#articuno(src="http://vignette3.wikia.nocookie.net/pokemon/images/d/df/144Articuno_AG_anime.png", alt="Articuno")
     #map
@@ -25,3 +32,7 @@ html
     //-     });
     //-   }
     script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCafvk0IzD_tMShj__V2rVl8erKjEY6nak&callback=initMap', async='', defer='')
+    // jQuery (necessary for Bootstrap's JavaScript plugins)
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+    // Include all compiled plugins (below), or include individual files as needed
+    script(src='js/bootstrap.min.js')
