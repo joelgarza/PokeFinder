@@ -5,20 +5,17 @@ body {
   height: 100%;
   margin: 0;
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Arial", Helvetica, sans-serif;
   background-image: url("http://shapirastudent.com/4/elad/background.jpg");
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: 100%;
 
 }
 #map {
-  position: absolute;
-  left: 400px;
-  top: 150px;
-  height:400px;
-  width:500px;
-
+  width: 100%;
+  height: 350px;
 }
+
 #articuno{
   position: fixed;
   right:100px;

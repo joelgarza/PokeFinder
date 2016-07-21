@@ -1,31 +1,43 @@
 extends ../layout
 
 block content
-  h1 PokeFinder Locations
-  p Where did you find your Pokemon in Pokemon Go?
-  form(action="", method="post")
-    input(type="text", placeholder = "Pokemon", name="name")
-    input(type="text", placeholder = "Location", name="location")
-    br
-    input(type="submit")
-  p Recent finds:
-  ul
-    each pokemon in pokemons
-      li #{pokemon.name} #{pokemon.location}
-    script.
-      function initMap() {
-        //var quardinates = new google.maps.Geocoder.geocode(address: "Mcallen")
-        var myLatLng = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat:26.203, lng: -98.230},
-        zoom: 8
-        });
-        var image = 'http://icons.iconarchive.com/icons/hektakun/pokemon/72/025-Pikachu-icon.png';
-        var marker = new google.maps.Marker({
-        position: {lat:26.203, lng: -98.230},
-        map: map,
-        icon: image
-        });
-      }
-      
+    h1 PokeFinder Locations
+    body
+    p Where did you find your Pokemon in Pokemon Go?
+
+    .row
+        .col-md-4.col-sm-3
+            form
+                .form-group
+                    label(for='name') Pokemon
+                    input#name.form-control(type='text', placeholder='Pokemon', name="name")
+                button.btn.btn-danger(type='submit') Submit
+                
+            hr
+                        
+            p Recent Posts:
+            ul
+                each pokemon in pokemons
+                    li #{pokemon.name} #{pokemon.location}
+                    
+        .col-md-8.col-sm-9
+            #map
+            
         
+    script.
+        function initMap() {
+            //var quardinates = new google.maps.Geocoder.geocode(address: "Mcallen")
+            var myLatLng = {lat: -25.363, lng: 131.044};
+            var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat:26.203, lng: -98.230},
+            zoom: 8
+            });
+            var image = 'http://icons.iconarchive.com/icons/hektakun/pokemon/72/025-Pikachu-icon.png';
+            var marker = new google.maps.Marker({
+            position: {lat:26.203, lng: -98.230},
+            map: map,
+            icon: image
+            });
+        }
+            
+                
