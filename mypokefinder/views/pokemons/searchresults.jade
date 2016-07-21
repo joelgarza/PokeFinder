@@ -20,7 +20,8 @@ block content
       // failed.", it means you probably did not give permission for the browser to
       // locate you.
       function updateFormWithGeolocation(){
-
+        //var infoWindow = new google.maps.InfoWindow({map: map});
+        // Try HTML5 geolocation.
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             $('#latitude').val(position.coords.latitude);
@@ -29,7 +30,8 @@ block content
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-
+            //infoWindow.setPosition(pos);
+            //infoWindow.setContent('You are here');
             map.setCenter(pos);
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
@@ -57,6 +59,7 @@ block content
           var markers = pokemons.map(function(pokemon){
             return new google.maps.Marker({
               position: {lat: pokemon.lat, lng: pokemon.lng},
+              //title: pokemon.name
               icon: image
             });
           });
@@ -68,7 +71,7 @@ block content
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.' :'Error: Your browser doesnt support geolocation.');
       }
-      
+
     script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBhPCihCcYeeMv-kGmul92Kjvltgb_tpAM&callback=initMap', async='', defer='')
 
         

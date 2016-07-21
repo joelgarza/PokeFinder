@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 
 var PokemonSchema = new mongoose.Schema({
-  name: String,
-  location: String
+  name: {type: String, required: true},
+  lat: {type: Number, required: true},
+  lng: {type: Number, required: true}
 
 });
 module.exports = mongoose.model('Pokemon', PokemonSchema);

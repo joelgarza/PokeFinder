@@ -11,13 +11,30 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+  console.log(req.body);
+
   var pokemon = new Pokemon({
     name: req.body.name,
-    location: req.body.location
+    lat: Number(req.body.latitude),
+    lng: Number(req.body.longitude)
   });
   pokemon.save(function(err){
     if (err) res.send('error ' + err);
     else res.redirect('/pokemon');
   })
 });
+
+router.get('/locations.json', function(req, res, next){
+  Pokemon.find(function(err, pokemons){
+    if (err) next(err);
+    res.send(pokemons.map(function(pokemon){
+      return {
+        name: pokemon.name,
+        lat: pokemon.lat,
+        lng: pokemon.lng
+      };
+    }));
+  });
+});
+
 module.exports = router;
