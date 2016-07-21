@@ -3,72 +3,77 @@ extends ../layout
 block content
   h1 PokeFinder Locations
   p Where did you find your Pokemon in Pokemon Go?
-  form(action="", method="post")
-    input(type="text", placeholder = "Pokemon", name="name")
-    input(id="latitude", type="hidden", name="latitude")
-    input(id="longitude", type="hidden", name="longitude")
-    br
-    input(type="submit")
-  p Recent finds:
-  ul
-    each pokemon in pokemons
-      li #{pokemon.name} #{pokemon.lat} #{pokemon.lng} 
-    
-    script.
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see the error "The Geolocation service
-      // failed.", it means you probably did not give permission for the browser to
-      // locate you.
-      function updateFormWithGeolocation(){
-
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            $('#latitude').val(position.coords.latitude);
-            $('#longitude').val(position.coords.longitude);
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-        // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
-      function updateMarkersOnMap(map, markers){
-        markers.forEach(function(marker){
-          marker.setMap(map);
-        });
-      }
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat:26.203, lng: -98.230},
-          zoom: 8
-        });
-        
-        updateFormWithGeolocation(map);
-        
-        var image = 'http://icons.iconarchive.com/icons/hektakun/pokemon/72/025-Pikachu-icon.png';
-        $.getJSON("/pokemon/locations.json", function(pokemons) {
-          var markers = pokemons.map(function(pokemon){
-            return new google.maps.Marker({
-              position: {lat: pokemon.lat, lng: pokemon.lng},
-              icon: image
-            });
-          });
+  
+  .row
+      .col-md-4.col-sm-3
+        form(action="", method="post")
+          .form-group
+            label(for='name') Pokemon
+            input#name.form-control(type='text', placeholder='Pokemon', name="name")
+            input#latitude(type="hidden", name="latitude")
+            input#longitude(type="hidden", name="longitude")
+          button.btn.btn-danger(type='submit') Submit
+          hr
           
-          updateMarkersOnMap(map, markers);
-        });
-      }
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.' :'Error: Your browser doesnt support geolocation.');
-      }
-      
-    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBhPCihCcYeeMv-kGmul92Kjvltgb_tpAM&callback=initMap', async='', defer='')
+          p Recent finds:
+          ul
+            each pokemon in pokemons
+              li #{pokemon.name} #{pokemon.lat} #{pokemon.lng} 
+      .col-md-8.col-sm-9
+          #map
+  script.
+    // Note: This example requires that you consent to location sharing when
+    // prompted by your browser. If you see the error "The Geolocation service
+    // failed.", it means you probably did not give permission for the browser to
+    // locate you.
+    function updateFormWithGeolocation(){
 
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          $('#latitude').val(position.coords.latitude);
+          $('#longitude').val(position.coords.longitude);
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+          map.setCenter(pos);
+        }, function() {
+          handleLocationError(true, infoWindow, map.getCenter());
+        });
+      } else {
+      // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+      }
+    }
+    function updateMarkersOnMap(map, markers){
+      markers.forEach(function(marker){
+        marker.setMap(map);
+      });
+    }
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat:26.203, lng: -98.230},
+        zoom: 8
+      });
+      
+      updateFormWithGeolocation(map);
+      
+      var image = 'http://icons.iconarchive.com/icons/hektakun/pokemon/72/025-Pikachu-icon.png';
+      $.getJSON("/pokemon/locations.json", function(pokemons) {
+        var markers = pokemons.map(function(pokemon){
+          return new google.maps.Marker({
+            position: {lat: pokemon.lat, lng: pokemon.lng},
+            icon: image
+          });
+        });
         
+        updateMarkersOnMap(map, markers);
+      });
+    }
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      infoWindow.setPosition(pos);
+      infoWindow.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.' :'Error: Your browser doesnt support geolocation.');
+    }
+    
+  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBhPCihCcYeeMv-kGmul92Kjvltgb_tpAM&callback=initMap', async='', defer='')
